@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Http\Controllers;
 
 use App\Models\Chollos;
 use App\Models\Categorias;
@@ -56,5 +56,11 @@ class CholloController extends Controller
     {
         $chollo->delete();
         return redirect()->route('home')->with('success', 'Chollo eliminado');
+    }
+
+    public function show($id)
+    {
+        $chollo= Chollos::findOrFail($id);
+        return view('mostrarChollo', compact('chollo'));
     }
 }
