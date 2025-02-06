@@ -17,7 +17,7 @@
     
     <main>
         <h1>Listado de Chollos</h1>
-        <table>
+        <table border="1px solid black">
             <tr>
                 <th>Título</th>
                 <th>Categoría</th>
