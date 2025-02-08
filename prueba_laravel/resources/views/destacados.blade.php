@@ -3,52 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chollos</title>
+    <title>Chollos Destacados</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
 
     <div class="container mt-4">
-        <h1 class="text-center"> Chollos </h1>
+        <h1 class="text-center">⭐ Chollos Destacados ⭐</h1>
 
-        <!-- Mensajes de éxito o error -->
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-
-        <!-- Navegación -->
         <div class="mb-3">
-            <a href="{{ route('home') }}" class="btn btn-secondary">🏠 Inicio</a>
-            <a href="{{ route('chollos.nuevos') }}" class="btn btn-info">🆕 Nuevos</a>
-            <a href="{{ route('chollos.destacados') }}" class="btn btn-warning">⭐ Destacados</a>
-            <a href="{{ route('chollos.create') }}" class="btn btn-success">➕ Crear Chollo</a>
-            <a href="{{ route('categorias.index') }}" class="btn btn-primary">📂 Categorías</a>
+            <a href="{{ route('chollos.index') }}" class="btn btn-secondary">⬅️ Volver a Chollos</a>
         </div>
 
-        <!-- Tabla de Chollos -->
         <table class="table table-striped">
             <thead class="table-dark">
                 <tr>
                     <th>Título</th>
                     <th>Categoría</th>
+                    <th>Puntuación</th>
+                    <th>Precio</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($chollos as $chollo)
+                @foreach($destacados as $chollo)
                     <tr>
                         <td><a href="{{ route('chollos.show', $chollo->id) }}">{{ $chollo->titulo }}</a></td>
                         <td>{{ $chollo->categoria->name }}</td>
+                        <td>⭐ {{ $chollo->puntuacion }}</td>
+                        <td>💰 {{ $chollo->precio_descuento }}€</td>
                         <td>
                             <a href="{{ route('chollos.edit', $chollo->id) }}" class="btn btn-primary">✏️ Editar</a>
                             <form action="{{ route('chollos.destroy', $chollo->id) }}" method="POST" class="d-inline">
@@ -61,11 +44,6 @@
                 @endforeach
             </tbody>
         </table>
-
-        <!-- Paginación -->
-        <div class="d-flex justify-content-center">
-            {{ $chollos->links() }}
-        </div>
     </div>
 
     <footer class="text-center mt-5 p-3 bg-light">

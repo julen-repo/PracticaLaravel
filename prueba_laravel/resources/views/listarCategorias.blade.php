@@ -11,12 +11,28 @@
     <div class="container mt-4">
         <h2>📌 Listado de Categorías</h2>
 
+        <!-- Mostrar mensajes de éxito o error -->
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         <!-- Botones de navegación -->
         <div class="mb-3">
             <a href="{{ route('chollos.index') }}" class="btn btn-secondary">⬅️ Volver a Chollos</a>
             <a href="{{ route('categorias.create') }}" class="btn btn-success">➕ Agregar Categoría</a>
         </div>
 
+        <!-- Tabla de categorías -->
         <table class="table mt-3">
             <thead>
                 <tr>
@@ -33,10 +49,7 @@
                         <td>{{ $categoria->name }}</td>
                         <td>{{ $categoria->chollos_count }}</td>
                         <td>
-                            <!-- Botón para editar -->
                             <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-primary">✏️ Editar</a>
-
-                            <!-- Botón para eliminar con un formulario -->
                             <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')

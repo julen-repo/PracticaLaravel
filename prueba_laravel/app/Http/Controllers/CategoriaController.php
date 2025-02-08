@@ -7,26 +7,15 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
-    /**
-     * Muestra el listado de categorías.
-     */
     public function index()
     {
         $categorias = Categorias::withCount('chollos')->get(); // Carga la relación con el conteo de chollos
         return view('listarCategorias', compact('categorias'));
     }
-
-    /**
-     * Muestra el formulario para crear una nueva categoría.
-     */
     public function create()
     {
         return view('crearCategoria');
     }
-
-    /**
-     * Guarda una nueva categoría en la base de datos.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -40,9 +29,6 @@ class CategoriaController extends Controller
         return redirect()->route('categorias.index')->with('success', 'Categoría creada exitosamente.');
     }
 
-    /**
-     * Muestra el formulario para editar una categoría existente.
-     */
     public function edit($id)
     {
         $categoria = Categorias::findOrFail($id);
@@ -62,11 +48,6 @@ class CategoriaController extends Controller
 
         return redirect()->route('categorias.index')->with('success', 'Categoría actualizada exitosamente.');
     }
-
-
-    /**
-     * Elimina una categoría de la base de datos.
-     */
     public function destroy($id)
     {
         $categoria = Categorias::findOrFail($id);

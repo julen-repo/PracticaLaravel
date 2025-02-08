@@ -69,4 +69,16 @@ class CholloController extends Controller
         $chollo = Chollos::findOrFail($id);
         return view('mostrarChollo', compact('chollo'));
     }
+
+    public function nuevos()
+    {
+        $nuevos = Chollos::with('categoria')->orderByDesc('id')->limit(3)->get(); // Últimos 3 chollos por ID
+        return view('nuevos', compact('nuevos'));
+    }
+
+    public function destacados()
+    {
+        $destacados = Chollos::with('categoria')->orderByDesc('puntuacion')->limit(10)->get(); // Top 10 mejor puntuados
+        return view('destacados', compact('destacados'));
+    }
 }

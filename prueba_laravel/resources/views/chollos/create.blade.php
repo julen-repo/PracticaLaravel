@@ -1,45 +1,88 @@
-<form action="{{ route('chollos.store') }}" method="POST">
-    @csrf
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Chollo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
 
-    <!-- Título -->
-    <label for="titulo">Título:</label>
-    <input type="text" id="titulo" name="titulo" placeholder="Título del chollo" required>
+    <div class="container mt-4">
+        <h1 class="text-center">➕ Crear Chollo</h1>
 
-    <!-- Descripción -->
-    <label for="descripcion">Descripción:</label>
-    <textarea id="descripcion" name="descripcion" placeholder="Descripción del chollo" required></textarea>
+        <div class="card shadow-lg p-4">
+            <form action="{{ route('chollos.store') }}" method="POST">
+                @csrf
 
-    <!-- URL -->
-    <label for="url">Enlace:</label>
-    <input type="url" id="url" name="url" placeholder="URL del chollo" required>
+                <!-- Título -->
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Título:</label>
+                    <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Título del chollo" required>
+                </div>
 
-    <!-- Categoría -->
-    <label for="categoria_id">Categoría:</label>
-    <select id="categoria_id" name="categoria_id" required>
-        @foreach($categorias as $categoria)
-            <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
-        @endforeach
-    </select>
+                <!-- Descripción -->
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" class="form-control" rows="4" placeholder="Descripción del chollo" required></textarea>
+                </div>
 
-    <!-- Puntuación -->
-    <label for="puntuacion">Puntuación:</label>
-    <input type="number" id="puntuacion" name="puntuacion" min="0" max="5" required>
+                <!-- URL -->
+                <div class="mb-3">
+                    <label for="url" class="form-label">Enlace:</label>
+                    <input type="url" id="url" name="url" class="form-control" placeholder="URL del chollo" required>
+                </div>
 
-    <!-- Precio Original -->
-    <label for="precio">Precio Original:</label>
-    <input type="number" id="precio" name="precio" step="0.01" placeholder="Precio original" required>
+                <!-- Categoría -->
+                <div class="mb-3">
+                    <label for="categoria_id" class="form-label">Categoría:</label>
+                    <select id="categoria_id" name="categoria_id" class="form-select" required>
+                        @foreach($categorias as $categoria)
+                            <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-    <!-- Precio con Descuento -->
-    <label for="precio_descuento">Precio con Descuento:</label>
-    <input type="number" id="precio_descuento" name="precio_descuento" step="0.01" placeholder="Precio con descuento" required>
+                <!-- Puntuación -->
+                <div class="mb-3">
+                    <label for="puntuacion" class="form-label">Puntuación:</label>
+                    <input type="number" id="puntuacion" name="puntuacion" class="form-control" min="0" max="5" required>
+                </div>
 
-    <!-- Disponibilidad -->
-    <label for="disponible">Disponible:</label>
-    <select id="disponible" name="disponible" required>
-        <option value="1">Sí</option>
-        <option value="0">No</option>
-    </select>
+                <!-- Precio Original -->
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio Original (€):</label>
+                    <input type="number" id="precio" name="precio" class="form-control" step="0.01" placeholder="Precio original" required>
+                </div>
 
-    <!-- Botón de enviar -->
-    <button type="submit">Guardar</button>
-</form>
+                <!-- Precio con Descuento -->
+                <div class="mb-3">
+                    <label for="precio_descuento" class="form-label">Precio con Descuento (€):</label>
+                    <input type="number" id="precio_descuento" name="precio_descuento" class="form-control" step="0.01" placeholder="Precio con descuento" required>
+                </div>
+
+                <!-- Disponibilidad -->
+                <div class="mb-3">
+                    <label for="disponible" class="form-label">Disponible:</label>
+                    <select id="disponible" name="disponible" class="form-select" required>
+                        <option value="1">Sí</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <!-- Botones -->
+                <div class="d-flex justify-content-between">
+                    <a href="{{ route('chollos.index') }}" class="btn btn-secondary">⬅️ Cancelar</a>
+                    <button type="submit" class="btn btn-success">💾 Guardar Chollo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5 p-3 bg-light">
+        <p>Julen © Chollos 2025</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
