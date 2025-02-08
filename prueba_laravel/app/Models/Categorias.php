@@ -21,4 +21,9 @@ class Categorias extends Model
      * @var array
      */
     protected $fillable = ['name'];
+
+    public function chollos()
+    {
+        return $this->hasMany(Chollos::class, 'categoria_id');
+    }
 }

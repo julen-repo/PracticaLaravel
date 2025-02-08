@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Chollos;
@@ -23,9 +24,14 @@ class CholloController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titulo' => 'required',
-            'descripcion' => 'required',
-            'categoria_id' => 'required',
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'url' => 'required|url|max:255',
+            'categoria_id' => 'required|exists:categorias,id',
+            'puntuacion' => 'required|integer|min:0|max:5',
+            'precio' => 'required|numeric|min:0',
+            'precio_descuento' => 'required|numeric|min:0|lte:precio',
+            'disponible' => 'required|boolean',
         ]);
 
         Chollos::create($request->all());
@@ -60,7 +66,7 @@ class CholloController extends Controller
 
     public function show($id)
     {
-        $chollo= Chollos::findOrFail($id);
+        $chollo = Chollos::findOrFail($id);
         return view('mostrarChollo', compact('chollo'));
     }
 }

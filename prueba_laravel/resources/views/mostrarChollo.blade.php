@@ -7,7 +7,6 @@
         <th>Puntuacion</th>
         <th>Precio</th>
         <th>Precio descuento</th>
-        <th>Disponible</th>
     </tr>
         <tr>
             <td>{{ $chollo->titulo }}</td>
@@ -17,7 +16,9 @@
             <td>{{ $chollo->puntuacion }}</td>
             <td>{{ $chollo->precio }}</td>
             <td>{{ $chollo->precio_descuento }}</td>
-            <td>{{ $chollo->disponible }}</td>
-
         </tr>
 </table>
+<form action="{{ route('regresar') }}" method="POST">
+    @csrf
+    <button type="submit">Regresar</button>
+</form>
